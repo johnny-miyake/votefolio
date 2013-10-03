@@ -9,7 +9,7 @@ Votefolio::Application.routes.draw do
   resources :users do
     resources :polls do
       resources :items
-      resources :votes
+      resources :votes, only: [:index, :create]
     end
   end
 end

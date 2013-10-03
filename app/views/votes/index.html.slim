@@ -1,0 +1,6 @@
+=link_to "polls", user_polls_path(@poll.user)
+ul
+- @poll.items.each do |item|
+  li
+    =image_tag item.photo
+    ="#{item.caption} (#{Vote.by_item(item).count})"

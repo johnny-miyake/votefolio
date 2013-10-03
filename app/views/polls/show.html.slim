@@ -13,12 +13,13 @@ p
 
 =form_for [@poll.user, @poll, @poll.votes.build] do |f|
   =f.hidden_field :item_id
-  ul
-    - @poll.items.each do |item|
-      li
-        =image_tag item.photo, class: %W(item-photo), "data-item-id" => item.id
-        =@poll.votes.by_item(item).count
-        =link_to "destroy", user_poll_item_path(current_user, @poll, item), method: :delete, confirm: "Are you sure?"
+
+ul
+  - @poll.items.each do |item|
+    li
+      =image_tag item.photo, class: %W(item-photo), "data-item-id" => item.id
+      =@poll.votes.by_item(item).count
+      =link_to "destroy", user_poll_item_path(current_user, @poll, item), method: :delete, confirm: "Are you sure?"
 
 = form_for [current_user, @poll, @poll.items.build] do |f|
   =f.text_field :caption

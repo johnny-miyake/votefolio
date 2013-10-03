@@ -1,4 +1,8 @@
 class VotesController < InheritedResources::Base
+  def index
+    @poll = Poll.find params[:poll_id]
+  end
+
   def create
     @item = Item.find vote_params[:item_id]
     @poll = @item.poll
