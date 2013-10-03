@@ -7,6 +7,16 @@ p
   strong Description:
   = @poll.description
 
+ul
+- @poll.items.each do |item|
+  li
+    =item.caption
+    =link_to "destroy", user_poll_item_path(current_user, @poll, item), method: :delete, confirm: "Are you sure?"
+
+= form_for [current_user, @poll, @poll.items.build] do |f|
+  =f.text_field :caption
+  =f.submit "add item"
+
 = link_to 'Edit', edit_user_poll_path(current_user, @poll)
 '|
 = link_to 'Back', user_polls_path(current_user)
