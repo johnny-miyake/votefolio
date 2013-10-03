@@ -8,13 +8,14 @@ table
     th
     th
 
-  - current_user.polls.each do |poll|
+  - @polls.each do |poll|
     tr
       td = poll.title
       td = poll.description
       td = link_to 'Show', user_poll_path(current_user, poll)
-      td = link_to 'Edit', edit_user_poll_path(current_user, poll)
-      td = link_to 'Destroy', user_poll_path(current_user, poll), confirm: 'Are you sure?', method: :delete
+      - if me? @user
+        td = link_to 'Edit', edit_user_poll_path(current_user, poll)
+        td = link_to 'Destroy', user_poll_path(current_user, poll), confirm: 'Are you sure?', method: :delete
 
 br
 

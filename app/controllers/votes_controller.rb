@@ -6,8 +6,11 @@ class VotesController < InheritedResources::Base
   def create
     @item = Item.find vote_params[:item_id]
     @poll = @item.poll
-    @poll.votes.create vote_params
-    redirect_to user_poll_path @poll.user, @poll
+    if @vote = @poll.votes.create(vote_params)
+      redirect_to user_poll_votes_path @poll.user, @poll
+    else
+      redirect_to user_poll_path @poll.user, @poll
+    end
   end
 
   private
