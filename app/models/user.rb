@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   devise :omniauthable, omniauth_providers: [:facebook]
+  has_many :polls, dependent: :destroy
 
   class << self
     def find_for_facebook_oauth auth, signed_in_resource = nil

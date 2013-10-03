@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Poll:
+  = @item.poll
+p
+  strong Caption:
+  = @item.caption
+
+= link_to 'Edit', edit_item_path(@item)
+'|
+= link_to 'Back', items_path

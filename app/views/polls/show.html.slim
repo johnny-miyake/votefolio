@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @poll.title
+p
+  strong Description:
+  = @poll.description
+
+= link_to 'Edit', edit_user_poll_path(current_user, @poll)
+'|
+= link_to 'Back', user_polls_path(current_user)
