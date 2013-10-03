@@ -18,6 +18,6 @@ class ItemsController < InheritedResources::Base
 
   private
   def item_params
-    params.require(:item).permit(:caption)
+    params.require(:item).permit(:caption, :photo)
   end
 end

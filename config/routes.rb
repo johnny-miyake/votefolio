@@ -9,6 +9,7 @@ Votefolio::Application.routes.draw do
   resources :users do
     resources :polls do
       resources :items
+      resources :votes
     end
   end
 end

@@ -7,16 +7,30 @@ p
   strong Description:
   = @poll.description
 
-ul
-- @poll.items.each do |item|
-  li
-    =item.caption
-    =link_to "destroy", user_poll_item_path(current_user, @poll, item), method: :delete, confirm: "Are you sure?"
+p
+  strong ="#{@poll.votes.count} votes"
+  = @poll.description
+
+=form_for [@poll.user, @poll, @poll.votes.build] do |f|
+  =f.hidden_field :item_id
+  ul
+    - @poll.items.each do |item|
+      li
+        =image_tag item.photo, class: %W(item-photo), "data-item-id" => item.id
+        =@poll.votes.by_item(item).count
+        =link_to "destroy", user_poll_item_path(current_user, @poll, item), method: :delete, confirm: "Are you sure?"
 
 = form_for [current_user, @poll, @poll.items.build] do |f|
   =f.text_field :caption
+  =f.file_field :photo
   =f.submit "add item"
 
 = link_to 'Edit', edit_user_poll_path(current_user, @poll)
 '|
 = link_to 'Back', user_polls_path(current_user)
+
+coffee:
+  $(".item-photo").click ->
+    itemId = $(this).attr("data-item-id")
+    $("#vote_item_id").val(itemId)
+    $("#new_vote").submit()

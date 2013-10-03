@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20131003143047) do
   create_table "items", force: true do |t|
     t.integer  "poll_id"
     t.string   "caption"
+    t.string   "photo"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
