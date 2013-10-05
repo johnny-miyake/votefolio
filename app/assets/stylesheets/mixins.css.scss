@@ -6,7 +6,6 @@
   background-image: -o-linear-gradient($from, $to);
 }
 
-
 @mixin clearfix {
   zoom:1;
   &:before, &:after {
@@ -18,4 +17,11 @@
   &:after {
     clear: both;
   }
+}
+
+@mixin transition ($transition) {
+  -webkit-transition: $transition;
+  -moz-transition:    $transition;
+  -ms-transition:     $transition;
+  -o-transition:      $transition;
 }

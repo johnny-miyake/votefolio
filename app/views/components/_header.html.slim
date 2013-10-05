@@ -2,7 +2,7 @@ header
   h1.brand Votefolio
   ul.menu
     -if user_signed_in?
-      li.menu-item =current_user.name
+      li.menu-item =link_to current_user.name, user_polls_path(current_user)
       li.separator
       li.menu-item =link_to "Sign out", destroy_user_session_path
     -else

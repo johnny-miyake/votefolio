@@ -1,4 +1,13 @@
+@import "mixins";
 #contents {
-  background-color: #666;
+  @include transition(all 0.3s ease);
   height: 100%;
+  &.before-fadein {
+    margin-left: 50px;
+    opacity: 0;
+  }
+  &.fadeout {
+    margin-left: -50px;
+    opacity: 0;
+  }
 }
