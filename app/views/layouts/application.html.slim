@@ -5,11 +5,8 @@ html
     =javascript_include_tag "application", "data-turbolinks-track" => true
     =csrf_meta_tags
   body
-    -if user_signed_in?
-      p
-        span =current_user.name
-        span =link_to "Sign out", destroy_user_session_path
-    -else
-      =link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
-    =yield
+    =render partial: "components/header"
+    #contents
+      =yield
+    =render partial: "components/footer"
     =yield :bottom

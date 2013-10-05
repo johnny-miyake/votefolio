@@ -1,0 +1,9 @@
+header
+  h1.brand Votefolio
+  ul.menu
+    -if user_signed_in?
+      li.menu-item =current_user.name
+      li.separator
+      li.menu-item =link_to "Sign out", destroy_user_session_path
+    -else
+      li.menu-item =link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
