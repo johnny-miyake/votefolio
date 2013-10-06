@@ -76,3 +76,78 @@
     }
   }
 }
+
+#polls-show {
+  #summary {
+    @include clearfix();
+    margin: 20px 0;
+    .title-wrap {
+      float: right;
+      text-align: right;
+      width: 40%;
+      .title {
+        font-size: 28px;
+        text-shadow: 0px -1px 1px #888;
+        font-weight: 100;
+      }
+      .votes {
+        margin: 5px 2px 0 0;
+      }
+    }
+    .description {
+      float: left;
+      width: 50%;
+      font-weight: 100;
+      font-size: 1.2em;
+    }
+  }
+  #items {
+    margin: 0 0 20px -20px;
+    @include clearfix();
+    .item {
+      float: left;
+      margin: 0 0 20px 20px;
+      position: relative;
+      .item-photo {
+        background-position: center;
+        background-size: cover;
+        height: 280px;
+        width: 280px;
+        margin-bottom: 10px;
+        box-shadow: 0px 6px 6px -6px #666;
+      }
+      &:hover {
+        .vote-btn {
+          @include opacity(1);
+        }
+      }
+      .vote-btn {
+        @include border-radius(5px);
+        @include opacity(0);
+        @include transition(all 0.1s linear);
+        box-shadow: 0px 0px 10px #333 inset;
+        background-color: rgba(0, 0, 0, 0.5);
+        width: 68px;
+        height: 30px;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+        .vote-label {
+          color: #fff;
+          margin: 6px 0 0 8px;
+        }
+      }
+      .item-caption {
+        font-size: 1.2em;
+        font-weight: 100;
+      }
+      .action-votes {
+        text-align: right;
+        li {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}

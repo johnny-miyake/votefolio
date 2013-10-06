@@ -1,41 +1,56 @@
-p#notice = notice
+#polls-show
+  #summary
+    .title-wrap
+      h1.title = @poll.title
+      p.votes ="#{@poll.votes.count} votes"
+    p.description = @poll.description
 
-p
-  strong Title:
-  = @poll.title
-p
-  strong Description:
-  = @poll.description
+  =form_for [@poll.user, @poll, @poll.votes.build] do |f|
+    =f.hidden_field :item_id
 
-p
-  strong ="#{@poll.votes.count} votes"
+  #items
+    - @poll.items.each do |item|
+      .item
+        .item-photo style="background-image: url('#{item.photo}')" data-image-url="#{item.photo}"
+        .vote-btn data-item-id="#{item.id}"
+          .vote-label + Vote
+        ul.action-votes
+          li.action =link_to "", edit_user_poll_item_path(current_user, @poll, item), class: "icon-edit"
+          li.action =link_to "", user_poll_item_path(current_user, @poll, item), class: "icon-trash", method: :delete, confirm: "Are you sure?" if me? @poll.user
+          li.votes #{@poll.votes.by_item(item).count} voted
+        p.item-caption = item.caption
 
-=form_for [@poll.user, @poll, @poll.votes.build] do |f|
-  =f.hidden_field :item_id
+  - if me? @poll.user
+    = form_for [current_user, @poll, @poll.items.build] do |f|
+      =f.text_field :caption
+      =f.file_field :photo
+      =f.submit "add item"
+    = link_to 'Edit', edit_user_poll_path(current_user, @poll)
+    '|
+    = link_to 'Result', user_poll_votes_path(current_user, @poll)
+    '|
 
-ul
-  - @poll.items.each do |item|
-    li
-      =image_tag item.photo, class: %W(item-photo), "data-item-id" => item.id
-      =@poll.votes.by_item(item).count
-      =link_to "destroy", user_poll_item_path(current_user, @poll, item), method: :delete, confirm: "Are you sure?" if me? @poll.user
-
-- if me? @poll.user
-  = form_for [current_user, @poll, @poll.items.build] do |f|
-    =f.text_field :caption
-    =f.file_field :photo
-    =f.submit "add item"
-  = link_to 'Edit', edit_user_poll_path(current_user, @poll)
-  '|
-  = link_to 'Result', user_poll_votes_path(current_user, @poll)
-  '|
-
-= link_to 'Polls', user_polls_path(current_user)
+  = link_to 'Polls', user_polls_path(current_user)
 
 =content_for :bottom do
-  - unless me? @poll.user
+  - if me? @poll.user
     coffee:
-      $(".item-photo").click ->
+      $(".vote-btn").click ->
         itemId = $(this).attr("data-item-id")
         $("#vote_item_id").val(itemId)
         $("#new_vote").submit()
+      $ ->
+        $(".item-photo").each ->
+          _this = $(this);
+          $(_this).fancybox({
+            padding : 10,
+            openEffect  : "elastic",
+            helpers : {
+              overlay : {
+                css : {
+                  "background" : "rgba(0, 0, 0, 0.6)"
+                }
+              }
+            },
+            href: $(_this).attr("data-image-url")
+          });

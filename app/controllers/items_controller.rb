@@ -9,6 +9,16 @@ class ItemsController < InheritedResources::Base
     end
   end
 
+  def edit
+    @poll = current_user.polls.find params[:poll_id]
+    @item = @poll.items.find params[:id]
+    if @item.save
+      redirect_to user_poll_item_path(current_user, @poll, @item)
+    else
+      render controller: :poll, action: :edit
+    end
+  end
+
   def destroy
     @poll = current_user.polls.find params[:poll_id]
     @item = @poll.items.find params[:id]

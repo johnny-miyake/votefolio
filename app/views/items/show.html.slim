@@ -1,12 +1,10 @@
-p#notice = notice
-
 p
   strong Poll:
-  = @item.poll
+  = @item.poll.title
 p
   strong Caption:
   = @item.caption
 
-= link_to 'Edit', edit_item_path(@item)
+= link_to 'Edit', edit_user_poll_item_path(current_user, @poll, @item)
 '|
-= link_to 'Back', items_path
+= link_to 'Back', user_poll_path(current_user, @poll)
