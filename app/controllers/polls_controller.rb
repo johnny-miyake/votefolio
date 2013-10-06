@@ -2,8 +2,12 @@ class PollsController < InheritedResources::Base
   before_filter :load_object, only: [:edit, :update, :destroy]
 
   def index
-    @user = User.find params[:user_id]
-    @polls = @user.polls
+    case @user = User.find(params[:user_id])
+    when current_user
+      @polls = @user.polls
+    else
+      @polls = @user.polls.votable
+    end
   end
 
   def new

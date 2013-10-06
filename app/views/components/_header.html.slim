@@ -1,5 +1,5 @@
 header
-  h1.brand Votefolio
+  h1.brand =link_to "Votefolio", root_path
   ul.menu
     -if user_signed_in?
       li.menu-item =link_to current_user.name, user_polls_path(current_user)

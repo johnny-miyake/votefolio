@@ -1,22 +1,16 @@
-h1 Listing polls
+#polls-index
+  #title
+    h1 ="#{current_user.name}'s polls"
+  #polls
+    - @polls.each do |poll|
+      .poll
+        .poll-photo style="background-image: url('#{poll.items.first.try :photo}')"
+          p.show-link = link_to "", user_poll_path(current_user, poll)
+        .poll-summary
+          p.title = link_to poll.title, user_poll_path(current_user, poll)
+          - if me? @user
+            ul.operations
+              li = link_to "", edit_user_poll_path(current_user, poll), class: "icon-edit"
+              li = link_to "", user_poll_path(current_user, poll), confirm: 'Are you sure?', method: :delete, class: "icon-trash"
 
-table
-  tr
-    th Title
-    th Description
-    th
-    th
-    th
-
-  - @polls.each do |poll|
-    tr
-      td = poll.title
-      td = poll.description
-      td = link_to 'Show', user_poll_path(current_user, poll)
-      - if me? @user
-        td = link_to 'Edit', edit_user_poll_path(current_user, poll)
-        td = link_to 'Destroy', user_poll_path(current_user, poll), confirm: 'Are you sure?', method: :delete
-
-br
-
-= link_to 'New Poll', new_user_poll_path(current_user)
+  = link_to 'New Poll', new_user_poll_path(current_user)
