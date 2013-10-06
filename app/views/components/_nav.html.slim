@@ -1,0 +1,7 @@
+nav#g-nav
+  ul.menu
+    -if user_signed_in?
+      li.menu-item =link_to "", user_polls_path(current_user), class: "icon-home"
+      li.menu-item =link_to "", destroy_user_session_path, class: "icon-signout"
+    -else
+      li.menu-item =link_to "", user_omniauth_authorize_path(:facebook), class: "icon-signin"

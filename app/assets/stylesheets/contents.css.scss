@@ -2,6 +2,7 @@
 #contents {
   @include transition(all 0.3s ease);
   height: 100%;
+  width: 880px;
   &.before-fadein {
     margin-left: 50px;
     @include opacity(0);

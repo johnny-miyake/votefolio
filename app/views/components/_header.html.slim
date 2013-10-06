@@ -1,9 +1,2 @@
 header
   h1.brand =link_to "Votefolio", root_path
-  ul.menu
-    -if user_signed_in?
-      li.menu-item =link_to current_user.name, user_polls_path(current_user)
-      li.separator
-      li.menu-item =link_to "Sign out", destroy_user_session_path
-    -else
-      li.menu-item =link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
