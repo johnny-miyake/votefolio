@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20131003143047) do
   create_table "votes", force: true do |t|
     t.integer  "poll_id"
     t.integer  "item_id"
+    t.integer  "user_id"
     t.text     "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -66,5 +67,6 @@ ActiveRecord::Schema.define(version: 20131003143047) do
 
   add_index "votes", ["item_id"], name: "index_votes_on_item_id"
   add_index "votes", ["poll_id"], name: "index_votes_on_poll_id"
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id"
 
 end

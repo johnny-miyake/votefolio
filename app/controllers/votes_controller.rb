@@ -1,6 +1,9 @@
 class VotesController < InheritedResources::Base
+  include ActionController::Live
+
   def index
     @poll = Poll.find params[:poll_id]
+    @votes = @poll.votes
   end
 
   def create

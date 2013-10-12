@@ -12,4 +12,7 @@ Votefolio::Application.routes.draw do
       resources :votes, only: [:index, :create]
     end
   end
+
+
+
 end

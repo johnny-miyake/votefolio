@@ -2,10 +2,10 @@
 @import "font-awesome";
 #polls-index {
   #title {
-    margin: 20px 0;
+    margin: 0 0 20px;
     h1 {
       font-size: 28px;
-      text-shadow: 0px -1px 1px #888;
+      text-shadow: 0px -1px 0px #888;
       text-align: right;
       font-weight: 100;
     }
@@ -102,21 +102,24 @@
     }
   }
   #items {
-    margin: 0 0 20px -20px;
+    margin: 0 0 20px -80px;
     @include clearfix();
     .item {
       float: left;
-      margin: 0 0 20px 20px;
+      margin: 0 0 20px 80px;
       position: relative;
       .item-photo {
         background-position: center;
         background-size: cover;
-        height: 280px;
-        width: 280px;
+        height: 240px;
+        width: 240px;
         margin-bottom: 10px;
         box-shadow: 0px 6px 6px -6px #666;
       }
       &:hover {
+        .vote-btn {
+          @include opacity(1);
+        }
         .vote-btn {
           @include opacity(1);
         }
@@ -141,6 +144,7 @@
       .item-caption {
         font-size: 1.2em;
         font-weight: 100;
+        min-height: 1.2em;
       }
       .action-votes {
         text-align: right;
@@ -148,6 +152,53 @@
           display: inline-block;
         }
       }
+    }
+    .new-item {
+      background-color: #eee;
+      height: 240px;
+      width: 240px;
+      position: relative;
+      cursor: pointer;
+      margin-top: 1.2em;
+      .loaded-photo {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+      }
+      .new-label {
+        position: absolute;
+        top: 100px;
+        left: 108px;
+        font-size: 36px;
+        color: #bbb;
+      }
+      .upload-btn {
+        display: none;
+        position: absolute;
+        bottom: -32px;
+        width: 100%;
+        height: 32px;
+        @include gradient(#eee, #ddd);
+        .upload-label {
+          margin-top: 8px;
+          text-align: center;
+          color: #999;
+        }
+      }
+      &.file-selected {
+        .new-label {
+          display: none;
+        }
+        .upload-btn {
+          display: block;
+        }
+      }
+    }
+  }
+  #uploading-form {
+    form {
+      display: none;
     }
   }
 }

@@ -1,6 +1,21 @@
-=link_to "polls", user_polls_path(@poll.user)
-ul
-- @poll.items.each do |item|
-  li
-    =image_tag item.photo
-    ="#{item.caption} (#{Vote.by_item(item).count})"
+=breadcrumbs [{name: "Top", path: root_path}, {name: "#{@poll.user.name}'s polls", path: user_polls_path(@poll.user)}, {name: @poll.title, path: user_poll_path(@poll.user, @poll)}]
+#votes-index
+  #summary
+    .title-wrap
+      h1.title &#40;result&#41; #{@poll.title}
+      p.votes ="#{@votes.count} votes"
+
+  #items
+    - @poll.items.sort_by_votes.each do |item|
+      .item-row
+        .item style="background-image: url(#{item.photo})"
+        .info
+          .bar-wrap style="width: #{100.0 * item.votes.count / @poll.votes.count}%; min-width: 20px"
+            .bar.nolength
+              span.count #{item.votes.count}
+        .voters
+          - item.votes
+
+=content_for :bottom do
+  coffee:
+    $ -> $(".bar").removeClass("nolength")

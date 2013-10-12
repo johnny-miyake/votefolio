@@ -1,0 +1,61 @@
+@import "mixins";
+@import "font-awesome";
+#votes-index {
+  #summary {
+    @include clearfix();
+    margin: 0 0 20px;
+    .title-wrap {
+      float: right;
+      text-align: right;
+      .title {
+        font-size: 28px;
+        text-shadow: 0px -1px 0px #888;
+        font-weight: 100;
+      }
+      .votes {
+        margin: 5px 2px 0 0;
+      }
+    }
+  }
+  #items {
+    .item-row {
+      @include clearfix();
+      margin: 0 0 20px -20px;
+      .item {
+        margin-left: 20px;
+        float: left;
+        background-size: cover;
+        background-position: center;
+        height: 72px;
+        width: 72px;
+        box-shadow: 0px 6px 6px -6px #666;
+      }
+      .info {
+        margin-left: 20px;
+        float: left;
+        width: 788px;
+        .bar {
+          height: 20px;
+          background-color: #aaa;
+          width: 100%;
+          @include border-radius(10px);
+          @include transition(all 0.8s cubic-bezier(.13, .29, .57, 1.26));
+          text-align: right;
+          &.nolength {
+            width: 20px;
+          }
+          span.count {
+            display: inline-block;
+            height: 16px;
+            min-width: 1em;
+            margin: 2px 2px 0 0;
+            background-color: #f4f4f4;
+            color: #aaa;
+            text-align: center;
+            @include border-radius(10px);
+          }
+        }
+      }
+    }
+  }
+}

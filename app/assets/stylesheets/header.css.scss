@@ -1,12 +1,18 @@
 @import "mixins.css.scss";
 body > header {
   @include clearfix();
-  padding: 10px 0 5px;
+  padding: 10px 0 0;
   color: #000;
-  text-shadow: 0px -1px 0px #666;
-  border-bottom: 1px solid #333;
   h1 {
+    text-shadow: 0px -1px 0px #666;
     font-size: 28px;
     font-weight: 100;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #333;
+  }
+  .breadcrumnbs {
+    min-height: 20px;
+    font-weight: 100;
+    margin: 5px 0 0 2px;
   }
 }
