@@ -1,5 +1,5 @@
 class PollsController < InheritedResources::Base
-  before_filter :load_object, only: [:edit, :update, :destroy]
+  before_filter :load_object, only: [:show, :edit, :update, :destroy]
 
   def index
     case @user = User.find(params[:user_id])
@@ -8,6 +8,10 @@ class PollsController < InheritedResources::Base
     else
       @polls = @user.polls.votable
     end
+  end
+
+  def show
+    @user = User.find(params[:user_id])
   end
 
   def new

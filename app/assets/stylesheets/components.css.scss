@@ -1,0 +1,15 @@
+@import "mixins";
+@mixin owner-actions() {
+  .owner-actions {
+    li {
+      display: inline;
+      background-color: #ddd;
+      @include border-radius(10px);
+      height: 20px;
+      padding: 4px 8px;
+      a {
+        color: #666;
+      }
+    }
+  }
+}

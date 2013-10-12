@@ -1,8 +1,12 @@
+-breadcrumbs [{name: "Top", path: root_path}, {name: "#{@poll.user.name}'s polls", path: user_polls_path(@poll.user)}, {name: @poll.title, path: user_poll_path(@poll.user, @poll)}]
 #polls-show
   #summary
     .title-wrap
       h1.title #{@poll.title}
-      p.votes  #{@poll.votes.count} votes
+      ul
+        li.votes  #{@poll.votes.count} votes
+        li |
+        li #{link_to "Result", user_poll_votes_path(@user, @poll)}
     p.description #{@poll.description}
 
   =form_for [@poll.user, @poll, @poll.votes.build] do |f|
@@ -11,13 +15,13 @@
   #items
     - @poll.items.each do |item|
       .item
-        p.item-caption #{item.caption}
+        / p.item-caption #{item.caption}
         .item-photo style="background-image: url('#{item.photo}')" data-image-url="#{item.photo}"
         .vote-btn data-item-id="#{item.id}"
           .vote-label + Vote
         ul.action-votes
-          li.action #{link_to "", edit_user_poll_item_path(current_user, @poll, item), class: "icon-edit"}
-          li.action #{link_to "", user_poll_item_path(current_user, @poll, item), class: "icon-trash", method: :delete, confirm: "Are you sure?" if me? @poll.user}
+          li.action #{link_to "", edit_user_poll_item_path(@user, @poll, item), class: "icon-edit"}
+          li.action #{link_to "", user_poll_item_path(@user, @poll, item), class: "icon-trash", method: :delete, confirm: "Are you sure?" if me? @poll.user}
           li.votes  #{@poll.votes.by_item(item).count} voted
     .item.new-item
       .loaded-photo
@@ -27,16 +31,13 @@
 
   #uploading-form
     - if me? @poll.user
-      =form_for [current_user, @poll, @poll.items.build] do |f|
+      =form_for [@user, @poll, @poll.items.build] do |f|
         =f.text_field :caption
         =f.file_field :photo
         =f.submit "add item"
-      =link_to 'Edit', edit_user_poll_path(current_user, @poll)
-      '|
-      =link_to 'Result', user_poll_votes_path(current_user, @poll)
-      '|
 
-  =link_to 'Polls', user_polls_path(current_user)
+  ul.owner-actions
+    li #{link_to "Edit this poll", edit_user_poll_path(@user, @poll)}
 
 =content_for :bottom do
   - if me? @poll.user
