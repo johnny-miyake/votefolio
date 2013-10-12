@@ -1,8 +1,10 @@
-h1 Editing poll
+-breadcrumbs [{name: "Top", path: root_path}, {name: "#{@poll.user.name}'s polls", path: user_polls_path(@poll.user)}, {name: @poll.title, path: user_poll_path(@poll.user, @poll)}]
+#polls-edit
+  #title
+    h1 &#40;editing&#41; #{@poll.title}
 
-== render 'form'
+  =render 'form'
 
-= link_to 'Show', user_poll_path(current_user, @poll)
-'|
-= link_to 'Back', user_polls_path(current_user)
-
+  =link_to 'Show', user_poll_path(current_user, @poll)
+  '|
+  =link_to 'Back', user_polls_path(current_user)
