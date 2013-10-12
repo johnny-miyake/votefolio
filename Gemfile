@@ -18,7 +18,7 @@ gem "better_errors"
 gem "carrierwave"
 gem "font-awesome-sass-rails"
 gem "mysql2"
-gem "thin"
+gem "puma"
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
